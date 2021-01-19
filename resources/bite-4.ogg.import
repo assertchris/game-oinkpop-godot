@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/bite-4.ogg-036ad9f1e979a31f48a922700963b572.oggstr"
+
+[deps]
+
+source_file="res://resources/bite-4.ogg"
+dest_files=[ "res://.import/bite-4.ogg-036ad9f1e979a31f48a922700963b572.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

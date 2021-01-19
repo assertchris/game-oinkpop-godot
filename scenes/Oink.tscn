@@ -1,0 +1,93 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://resources/oink-1.png" type="Texture" id=1]
+[ext_resource path="res://scenes/Oink.gd" type="Script" id=2]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Eating"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 3 ]
+}
+
+[sub_resource type="Animation" id=2]
+resource_name = "Idle"
+length = 0.1
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
+}
+
+[sub_resource type="Animation" id=3]
+resource_name = "Running"
+length = 0.3
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ 0, 1, 2 ]
+}
+
+[sub_resource type="CapsuleShape2D" id=4]
+radius = 3.89437
+height = 6.49698
+
+[node name="Oink" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Area" type="Area2D" parent="."]
+
+[node name="Animation" type="AnimationPlayer" parent="Area"]
+playback_speed = 0.5
+anims/Eating = SubResource( 1 )
+anims/Idle = SubResource( 2 )
+anims/Running = SubResource( 3 )
+
+[node name="Position" type="Position2D" parent="Area"]
+position = Vector2( 9, 6 )
+rotation = 3.14159
+scale = Vector2( 5.80308e+06, 1.57723e+08 )
+
+[node name="Sprite" type="Sprite" parent="Area"]
+scale = Vector2( 0.25, 0.25 )
+texture = ExtResource( 1 )
+hframes = 4
+frame = 2
+
+[node name="Collision" type="CollisionShape2D" parent="Area"]
+position = Vector2( 6, 2 )
+rotation = -1.5708
+scale = Vector2( 1.9, -1.4 )
+shape = SubResource( 4 )
+
+[node name="SecondsAndScoreTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+[connection signal="area_entered" from="Area" to="." method="on_Area_area_entered"]
+[connection signal="timeout" from="SecondsAndScoreTimer" to="." method="on_SecondsAndScoreTimer_timeout"]
